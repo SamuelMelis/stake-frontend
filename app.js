@@ -1,4 +1,8 @@
 // app.js
+// app.js (add these at the top)
+const usernameEl = document.getElementById('username');
+const balanceEl = document.getElementById('balance');
+const avatarEl = document.getElementById('avatar');
 
 document.addEventListener('DOMContentLoaded', () => {
     // ⚠️ CRITICAL STEP ⚠️
@@ -90,4 +94,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load when the app opens
     fetchStatus();
+    fetchUserProfile(); // Fetch user profile data on load
+    // app.js (add this new function)
+const fetchUserProfile = async () => {
+    try {
+        const response = await fetch(`${API_URL}/api/user-profile`);
+        const profile = await response.json();
+        
+        usernameEl.textContent = profile.name;
+        // Format the balance to 2 decimal places
+        balanceEl.textContent = `USDT: ${profile.usdt.toFixed(2)}`; 
+        avatarEl.src = profile.avatarUrl;
+    } catch (error) {
+        usernameEl.textContent = 'Error';
+        balanceEl.textContent = 'Could not load balance.';
+    }
+};
 });

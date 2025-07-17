@@ -61,9 +61,36 @@
             display: none; /* Hidden by default */
             height: 20px;
         }
+        /* index.html (add this inside the <style> tag) */
+
+        #profile-card {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 15px;
+        }
+        #avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #555;
+        }
+        #user-info h2 { font-size: 20px; margin: 0; }
+        #user-info p { font-size: 16px; margin: 5px 0 0; color: #4CAF50; font-weight: bold; }
     </style>
 </head>
 <body>
+    <!-- index.html (add this new card at the top, inside <body>) -->
+
+    <!-- USER PROFILE CARD -->
+    <div class="card" id="profile-card">
+        <img id="avatar" src="https://via.placeholder.com/60" alt="Avatar">
+        <div id="user-info">
+            <h2 id="username">Loading...</h2>
+            <p id="balance">USDT: --</p>
+        </div>
+    </div>
 
     <div class="card">
         <h1>21-Day Challenge</h1>
