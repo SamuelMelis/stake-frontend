@@ -1,5 +1,8 @@
 // app.js
 // app.js (add these at the top)
+const historyBtn = document.getElementById('history-btn');
+const historySection = document.getElementById('history-section');
+const historyList = document.getElementById('history-list');
 const usernameEl = document.getElementById('username');
 const balanceEl = document.getElementById('balance');
 const avatarEl = document.getElementById('avatar');
@@ -110,4 +113,44 @@ const fetchUserProfile = async () => {
         balanceEl.textContent = 'Could not load balance.';
     }
 };
+// app.js (add this new function/event listener)
+
+historyBtn.addEventListener('click', async () => {
+    // Toggle visibility of the history section
+    const isHidden = historySection.classList.toggle('hidden');
+    historyBtn.textContent = isHidden ? 'View History' : 'Hide History';
+
+    // If we are showing the section, fetch the data
+    if (!isHidden) {
+        historyList.innerHTML = '<li>Loading history...</li>'; // Show loading indicator
+        try {
+            const response = await fetch(`${API_URL}/api/bet-history`);
+            const history = await response.json();
+
+            if (history.length === 0) {
+                historyList.innerHTML = '<li>No bets placed yet.</li>';
+                return;
+            }
+
+            // Clear the list and build the new items
+            historyList.innerHTML = '';
+            history.forEach(bet => {
+                const li = document.createElement('li');
+                // Add a class based on the bet status (won, lost, pending)
+                li.className = `history-item ${bet.status.toLowerCase()}`;
+                
+                li.innerHTML = `
+                    <p><strong>Bet ID:</strong> ${bet.id}</p>
+                    <p><strong>Amount:</strong> ${bet.amount} ${bet.currency?.symbol || 'USD'}</p>
+                    <p><strong>Odds:</strong> x${bet.potentialMultiplier}</p>
+                    <p><strong>Status:</strong> ${bet.status}</p>
+                `;
+                historyList.appendChild(li);
+            });
+
+        } catch (error) {
+            historyList.innerHTML = '<li>Failed to load history.</li>';
+        }
+    }
+});
 });

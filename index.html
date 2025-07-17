@@ -78,6 +78,36 @@
         }
         #user-info h2 { font-size: 20px; margin: 0; }
         #user-info p { font-size: 16px; margin: 5px 0 0; color: #4CAF50; font-weight: bold; }
+        
+        /* index.html (add this inside the <style> tag) */
+
+        .secondary-btn {
+            background-color: #555;
+            font-size: 14px;
+            padding: 8px 15px;
+            margin-top: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        #history-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        .history-item {
+            background: #444;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: left;
+            border-left: 5px solid #555; /* Default pending color */
+        }
+        .history-item p {
+            margin: 0 0 5px;
+        }
+        .history-item.won { border-left-color: #4CAF50; } /* Green for won */
+        .history-item.lost { border-left-color: #F44336; } /* Red for lost */
     </style>
 </head>
 <body>
@@ -96,12 +126,22 @@
         <h1>21-Day Challenge</h1>
         <div id="streak-counter">--</div>
         <p id="bet-status">Loading status...</p>
+         <button id="history-btn" class="secondary-btn">View History</button>
     </div>
     
     <div class="card">
         <h2>Place Today's Bet</h2>
         <button id="place-bet-btn">Go to Stake & Place Bet</button>
         <p id="listening-status"></p>
+    </div>
+    <!-- index.html (add this new section at the bottom) -->
+
+<!-- BET HISTORY SECTION (HIDDEN BY DEFAULT) -->
+    <div id="history-section" class="hidden">
+        <h2>Bet History</h2>
+        <ul id="history-list">
+            <!-- Bet history items will be injected here by JavaScript -->
+        </ul>
     </div>
 
     <script src="app.js"></script>
