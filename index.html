@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Stake Bet Tracker</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --tg-theme-bg-color: #222;
+            --tg-theme-text-color: #fff;
+            --tg-theme-button-color: #0088cc;
+            --tg-theme-button-text-color: #fff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color);
+            color: var(--tg-theme-text-color);
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .card {
+            background: #333;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        h1 { margin: 0; font-size: 24px; }
+        #streak-counter {
+            font-size: 4em;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+        #bet-status { font-size: 16px; color: #aaa; }
+        button {
+            background: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.1s ease;
+        }
+        button:active { transform: scale(0.98); }
+        button:disabled { background: #555; cursor: not-allowed; }
+        #listening-status {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none; /* Hidden by default */
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>21-Day Challenge</h1>
+        <div id="streak-counter">--</div>
+        <p id="bet-status">Loading status...</p>
+    </div>
+    
+    <div class="card">
+        <h2>Place Today's Bet</h2>
+        <button id="place-bet-btn">Go to Stake & Place Bet</button>
+        <p id="listening-status"></p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
